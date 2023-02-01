@@ -1,0 +1,156 @@
+@media (min-width: 768px){
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1  {
+    width: 100%;
+    *width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14%;
+    *width: 14%;
+  }
+}
+
+body {
+  /* background-image: url("bg.png"); */
+  /* background-size: 40%; */
+  color: unset /*#fff*/;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+.grey-gradient {
+  background: linear-gradient(to bottom,rgb(228, 228, 228) ,rgb(165, 165, 165));;
+}
+
+button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+}
+button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  justify-items: center;
+}
+
+.ephemeride {
+  margin: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: unset ;
+  justify-items: center;
+  font-size: 0.9em;
+}
+
+.ephemeride div{
+  margin: 0.25em 0.5em;
+  padding: 0.25em;
+  text-align: left;
+  /* border: 1px solid rgba(2, 8, 20, 0.25); */
+}
+
+.ephemeride p{
+  margin: 0;
+  display: inline-block;
+}
+
+.ephemeride hr{
+  margin: 0 ;
+}
+
+.ephemeride .city {
+  width: 100%;
+  display: flex;
+}
+
+.city h2 {
+  margin-right: 5%;
+}
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin: 0; 
+  padding: 0;
+  flex-wrap: unset ;
+  /* align-content: flex-end; */
+  /* grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); */
+}
+
+.forecast-details {
+  padding: 0;
+  margin: 0;
+}
+
+.wind
+{
+    padding-right: 0px;
+}
+
+.wind .arrow
+{
+    border: 1px solid rgba(2, 8, 20, 0.25);
+    border-radius: 50%;
+    height:25px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 25px;
+}
+
+.new {
+  margin: 0.5em;
+  display: grid;
+  justify-items: center;
+  border: 0.01em solid rgba(2, 8, 20, 0.25);
+}
+
+.new a {
+  font-size: medium;
+  text-align: justify;
+}
+.new p {
+  font-size: small;
+}
+
+.new span {
+  font-style: italic;
+  color: #23272a;
+}
+
+.tags {
+  border: 1px solid #b39b5f;
+  border-radius: 15%;
+  background-color: #fdf4db;
+  font-style: italic;
+  color: #23272a;
+}
+
+.none:link {
+  color:inherit;
+  text-decoration: none;
+}
+.none:visited {
+  color:inherit;
+  text-decoration: none;
+}

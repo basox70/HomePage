@@ -1,0 +1,30 @@
+{
+    "appname":"your_app_name",
+    "meteoToken":"token_from_https://api.meteo-concept.com",
+    "insee": [10000], 
+    "rss":{ "lowernameoffeed" :
+        {
+            "_id" : 1,
+            "shortname" : "shortname for url",
+            "fullname" : "Fullname for page title",
+            "rssUrl" : "rss url",
+            "website" : "main website url"
+        }
+    },
+    "_informations": {
+        "appname": "pretty obvious what is it for, no ?",
+        "meteoToken" : "Token you can get at https://api.meteo-concept.com",
+        "insee": "Table of insee number of the city you want weather from",
+        "rss": "Dictionnary of rss feed you want",
+        "rssExample" : {
+            "devto" :
+            {
+                "_id": 1,
+                "shortname": "Devto",
+                "fullname" : "Dev To",
+                "rssUrl": "https://dev.to/feed/",
+                "website": "https://dev.to/"
+            }
+        }
+    }
+}

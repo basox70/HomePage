@@ -1,0 +1,54 @@
+{% extends "squelette.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='weather-icons/css/weather-icons.min.css') }}" />
+{% endblock %}
+
+{% block titre %}Basile HomePage{% endblock %}
+
+{% block mainTop %}
+<h1>Bienvenue sur la home page de Basile</h1>
+<hr />
+{% endblock%}
+    
+
+{% block content %}
+    <section>
+      {% for feed in feeds %}
+        <a href="{{ url_for('rss') }}{{feed}}"><button>{{feeds[feed].shortname}}</button></a>
+      {% endfor %}
+    </section>
+    {% for city in rss %}
+    <section class="ephemeride">
+      <div class="grey-gradient city">
+        <h2>{{rss[city]["eph0"]["city"]["name"]}}</h2>
+        <div><h5>Aujourd'hui</h5>
+        <p>Lever : {{rss[city]["eph0"]["ephemeride"]["sunrise"]}}<br/>
+        Coucher : {{rss[city]["eph0"]["ephemeride"]["sunset"]}}</p>
+        </div>
+        <div><h5>Demain</h5>
+        <p>Lever : {{rss[city]["eph1"]["ephemeride"]["sunrise"]}}<br/>
+        Coucher : {{rss[city]["eph1"]["ephemeride"]["sunset"]}}</p>
+        </div>
+        <div>
+        <h5>Lune</h5>
+        <p>{{rss[city]["eph0"]["ephemeride"]["moon_phase"]}}</p>
+        </div>
+      </div>
+      <div class="weather-grid">
+        {% for forecast in rss[city]["prevd"]["forecast"] %}
+        <div class="forecast-details grey-gradient">
+          <h5>{{forecast[0].datetime|string_datetime("small")}} ({{rss[city].prev.forecast[forecast[0].day].tmin}}°/{{rss[city].prev.forecast[forecast[0].day].tmax}}°)</h5>
+          <hr />
+          {% for period in forecast %}
+          <p><b>{{period.datetime|string_datetime("hours")}}&nbsp;: </b></p><br/>
+          <p><i style="font-size: 2em;" class="wi {{weather[period.weather|string][1]}}"></i> {{weather[period.weather|string][0]}} {{period.temp2m}}°</p><br/>
+          <p class="wind">Vent : <span class="arrow" style="transform: rotate({{period.dirwind10m - 90}}deg);">&#10148;</span> <span style="margin-left: 25px;">{{period.wind10m}}km/h ({{period.gust10m}}km/h)</span></p><br/>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    
+    </section>
+    {% endfor %}
+{% endblock%}

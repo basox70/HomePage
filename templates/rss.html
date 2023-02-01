@@ -1,0 +1,28 @@
+{% extends "squelette.html" %}
+
+{% block titre %}Basile HomePage - JDH{% endblock %}
+
+{% block mainTop %}
+<h1>News <a class="none" href="{{url}}" target="_blank">{{title}}</a></h1>
+    <hr />
+{% endblock%}
+
+{% block content %}
+
+    <!-- {{ typeRss }}
+    {{rss}} -->
+    <section>
+    
+      {% for flux in rss.entries %}
+      <div class="new">
+        <a href={{flux.link}} target="_blank">{{flux.title}}</a>
+        <p>{{flux.author}} - 
+          {{flux.published_parsed|format_datetime("small")}} - 
+          <span>{{flux.link|domain}}</span> 
+          <span class="tags">&nbsp;{% for cat in flux.tags %}{{cat.term}} {% endfor %}&nbsp;</span></p>
+      </div>
+      
+      {% endfor %}
+    
+    </section>
+{% endblock %}
