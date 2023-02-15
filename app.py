@@ -12,7 +12,7 @@ rssInfos = rssfeed.Infos()
 cfg = config.Config()
 feeds = cfg.rss
 
-app = Flask(cfg.appname)
+app = Flask(__name__)
 
 days = {"Monday":"Lundi", "Tuesday":"Mardi","Wednesday":"Mercredi", "Thursday":"Jeudi", "Friday":"Vendredi", "Saturday":"Samedi", "Sunday":"Dimanche"}
 
