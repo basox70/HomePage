@@ -83,7 +83,6 @@ class Infos():
                         datas[i] = self.getData(files[i], urls[i])
                     else:
                         with open(files[i],"r") as f:
-                            print(f)
                             datas[i] = json.load(f)
 
             
