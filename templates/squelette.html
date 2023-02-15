@@ -18,7 +18,7 @@
         <ul class="navbar-nav mr-auto">
           {% for feed in feeds %}
           <li class="nav-item {% if active==feeds[feed]._id %} active {% endif %}">
-            <a class="nav-link" href="{{ url_for('rss') }}{{feed}}">{{feeds[feed].shortname}}</a>
+            <a class="nav-link" href="{{ url_for('rss',rssName=feed) }}">{{feeds[feed].shortname}}</a>
           </li>
           {% endfor %}
         </ul>

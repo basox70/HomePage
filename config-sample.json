@@ -1,5 +1,6 @@
 {
     "appname":"your_app_name",
+    "port":8000,
     "meteoToken":"token_from_https://api.meteo-concept.com",
     "insee": [10000], 
     "rss":{ "lowernameoffeed" :
@@ -9,13 +10,15 @@
             "fullname" : "Fullname for page title",
             "rssUrl" : "rss url",
             "website" : "main website url"
-        }
+        },
+    "debug":true
     },
     "_informations": {
-        "appname": "pretty obvious what is it for, no ?",
+        "appname" : "pretty obvious what is it for, no ?",
+        "port" : "port number to run flask server on",
         "meteoToken" : "Token you can get at https://api.meteo-concept.com",
-        "insee": "Table of insee number of the city you want weather from",
-        "rss": "Dictionnary of rss feed you want",
+        "insee" : "Table of insee number of the city you want weather from",
+        "rss" : "Dictionnary of rss feed you want",
         "rssExample" : {
             "devto" :
             {
@@ -25,6 +28,7 @@
                 "rssUrl": "https://dev.to/feed/",
                 "website": "https://dev.to/"
             }
-        }
+        },
+        "debug" : "true to display the error info on the website, false either"
     }
 }

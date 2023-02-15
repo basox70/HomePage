@@ -15,7 +15,7 @@
 {% block content %}
     <section>
       {% for feed in feeds %}
-        <a href="{{ url_for('rss') }}{{feed}}"><button>{{feeds[feed].shortname}}</button></a>
+        <a href="{{ url_for('rss',rssName=feed) }}"><button>{{feeds[feed].shortname}}</button></a>
       {% endfor %}
     </section>
     {% for city in rss %}
@@ -26,7 +26,7 @@
         <p>Lever : {{rss[city]["eph0"]["ephemeride"]["sunrise"]}}<br/>
         Coucher : {{rss[city]["eph0"]["ephemeride"]["sunset"]}}</p>
         </div>
-        <div><h5>Demain</h5>
+        <div><h5>Demain {{days[rss[city]["eph1"]["ephemeride"]["datetime"]|string_datetime("days")]}}</h5>
         <p>Lever : {{rss[city]["eph1"]["ephemeride"]["sunrise"]}}<br/>
         Coucher : {{rss[city]["eph1"]["ephemeride"]["sunset"]}}</p>
         </div>
@@ -38,7 +38,7 @@
       <div class="weather-grid">
         {% for forecast in rss[city]["prevd"]["forecast"] %}
         <div class="forecast-details grey-gradient">
-          <h5>{{forecast[0].datetime|string_datetime("small")}} ({{rss[city].prev.forecast[forecast[0].day].tmin}}°/{{rss[city].prev.forecast[forecast[0].day].tmax}}°)</h5>
+          <h5>{{days[forecast[0].datetime|string_datetime("days")]|short}} {{forecast[0].datetime|string_datetime("small")}} ({{rss[city].prev.forecast[forecast[0].day].tmin}}°/{{rss[city].prev.forecast[forecast[0].day].tmax}}°)</h5>
           <hr />
           {% for period in forecast %}
           <p><b>{{period.datetime|string_datetime("hours")}}&nbsp;: </b></p><br/>
