@@ -4,3 +4,5 @@ data
 config.json
 __pycache__
 *env.py
+homepage.sock
+uwgi.ini
