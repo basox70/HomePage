@@ -1,10 +1,9 @@
-import os, sys, json
+import os, sys, json, subprocess
 from time import strptime, strftime
 from datetime import date
 from pprint import pprint
 
 from flask import Flask, render_template, request, session, redirect, url_for, abort
-import aiohttp
 
 from utils import config, rssfeed
 
@@ -83,6 +82,11 @@ def rss(rssName):
         abort(404)
     rss = rssInfos.getRss(cfg.rss[rssName]["rssUrl"])
     return render_template("rss.html", rss=rss, url=cfg.rss[rssName]["website"], title=cfg.rss[rssName]["fullname"], active=cfg.rss[rssName]["_id"], feeds=feeds)
+
+@app.route("/git/pull")
+def gitPull():
+    subprocess.Popen("git pull", shell=True)
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(port=cfg.port, debug=cfg.debug)
