@@ -1,0 +1,60 @@
+{% extends "squelette.html" %}
+
+{% block titre %} - Config{% endblock %}
+
+{% block mainTop %}
+<h1>Config de la home page de Basile</h1>
+<hr />
+{% endblock%}
+    
+
+{% block content %}
+    {% if saved %}
+    <p>Configuration mise à jour !</p>
+    {% endif %}
+    <section class="config">
+      <form method="post" action="/config" >
+        <table>
+        <tr><td><label for="appname">Nom de l'app</label></td><td><input name="appname" type="text" value="{{cfg.appname}}"/></td></tr>
+        <tr><td><label for="username">Username</label></td><td><input name="username" type="text" value="{{cfg.username}}"/></td></tr>
+        <tr><td><label for="password">Password</label></td> <td><input name="password" type="password" value="{{cfg.password}}"/></td>
+        <tr><td><label for="meteoToken">Token appli météo</label></td> <td><input name="meteoToken" type="password" value="{{cfg.meteoToken}}"/></td>
+        <tr><td><label for="insee">Code INSEE des villes</label></td> <td><input name="insee" type="text" value="{% for insee in cfg.insee %}{{insee}}{%if insee != cfg.insee[-1] %}, {% endif %}{% endfor %}"/></td>
+        <tr><td><label for="rss">RSS</label></td> <td><table><thead>
+          <td>Nom (unique)</td>
+          <td>id (unique)</td>
+          <td>Nom court</td>
+          <td>Nom complet</td>
+          <td>URL flux RSS</td>
+          <td>Site internet</td>
+        </thead>
+        {% for item in cfg.rss %}          
+          <tr>
+              <td><input type="text" name="name" value="{{ item }}"></td>
+              <td><input type="number" name="_id" min="0" value="{{ cfg.rss[item]['_id'] }}"></td>
+              <td><input type="text" name="shortname" value="{{ cfg.rss[item]['shortname'] }}"></td>
+              <td><input type="text" name="fullname" value="{{ cfg.rss[item]['fullname'] }}"></td>
+              <td><input type="url" name="rssUrl" value="{{ cfg.rss[item]['rssUrl'] }}"></td>
+              <td><input type="url" name="website" value="{{ cfg.rss[item]['website'] }}"></td>
+              <td><input type="submit" name="delrss{{ cfg.rss[item]['_id'] }}" value="Supprimer RSS"></td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td><input type="text" name="name" value=""></td>
+            <td><input type="number" name="_id" min="0" value="{{ cfg.rss|dictLen +1 }}"></td>
+            <td><input type="text" name="shortname" value=""></td>
+            <td><input type="text" name="fullname" value=""></td>
+            <td><input type="text" name="rssUrl" value=""></td>
+            <td><input type="text" name="website" value=""></td>
+            <td><input type="submit" name="addrss" value="Ajouter RSS"></td>
+          </tr>
+        </table>
+        </td></tr>
+        <tr><td><label for="logging">Niveau de log</label></td> <td><input name="logging" type="text" value="{{cfg.logging}}"/></td>
+        <tr><td><label for="debug">Debug</label></td> <td><input name="debug" type="checkbox" {% if cfg.debug %}checked{% endif %}/></td>
+        </table>
+        <input name="port" type="hidden" value="{{cfg.port}}"/>
+        <input type="submit" name="update" value="Mettre à jour">
+      </form>
+    </section>
+{% endblock%}

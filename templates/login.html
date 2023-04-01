@@ -1,0 +1,16 @@
+{% extends "squelette.html" %}
+
+{% block titre %} - Config{% endblock %}
+
+
+    
+
+{% block content %}
+    <section class="login">
+      <form method="post" action="/login" >
+        <p><input name="user" type="text" placehoder="username"/></p>
+        <p><input name="password" type="password" placeholder="password"/></p>
+        <p><input type="submit" name="login" value="Se connecter"></p>
+      </form>
+    </section>
+{% endblock%}

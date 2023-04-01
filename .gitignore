@@ -2,6 +2,7 @@
 .vscode
 data
 config.json
+config_test.json
 __pycache__
 *env.py
 homepage.sock

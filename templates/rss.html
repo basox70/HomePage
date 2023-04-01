@@ -1,9 +1,9 @@
 {% extends "squelette.html" %}
 
-{% block titre %}Basile HomePage - JDH{% endblock %}
+{% block titre %} - {{rssFeed.shortname}}{% endblock %}
 
 {% block mainTop %}
-<h1>News <a class="none" href="{{url}}" target="_blank">{{title}}</a></h1>
+<h1>News <a class="none" href="{{rssFeed.website}}" target="_blank">{{rssFeed.fullname}}</a></h1>
     <hr />
 {% endblock%}
 
