@@ -2,7 +2,9 @@
     "appname":"your_app_name",
     "port":8000,
     "meteoToken":"token_from_https://api.meteo-concept.com",
-    "insee": [10000], 
+    "insee": [10000],
+    "username": "username",
+    "password": "passwordGoesHere",
     "rss":{ "lowernameoffeed" :
         {
             "_id" : 1,
@@ -18,6 +20,8 @@
         "port" : "port number to run flask server on",
         "meteoToken" : "Token you can get at https://api.meteo-concept.com",
         "insee" : "Table of insee number of the city you want weather from",
+        "username": "The username for config page",
+        "password": "password, can be set clearly in config or using sha256",
         "rss" : "Dictionnary of rss feed you want",
         "rssExample" : {
             "devto" :
