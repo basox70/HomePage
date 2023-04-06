@@ -1,7 +1,8 @@
 import os, sys, json, subprocess
 from time import strptime, strftime
-from datetime import date
 from pprint import pprint
+from datetime import datetime, date
+import logging
 
 from flask import Flask, render_template, request, session, redirect, url_for, abort, flash
 from hashlib import sha256
@@ -13,6 +14,21 @@ cfg = config.Config()
 feeds = cfg.rss
 
 app = Flask(__name__)
+
+if cfg.loggingLevel == logging.INFO:
+    logfile = f'logs/{datetime.now().strftime("%Y%m")}_homepage.log'
+elif cfg.loggingLevel == logging.DEBUG:
+    logfile = f'logs/{datetime.now().strftime("%Y%m%d_%H%M")}_homepage.log'
+else:
+    logfile = f'logs/homepage.log'
+
+logging.basicConfig(filename=logfile, filemode="a", format='%(asctime)s-%(process)d-%(levelname)s-%(message)s', datefmt='%y%m%d_%H%M%S', level=cfg.loggingLevel)
+logging.info("------------------------------------------")
+logging.info("Starting website")
+
+# app.logger.
+# app.logger.info("------------------------------------------")
+# app.logger.info("Starting website")
 
 days = {"Monday":"Lundi", "Tuesday":"Mardi","Wednesday":"Mercredi", "Thursday":"Jeudi", "Friday":"Vendredi", "Saturday":"Samedi", "Sunday":"Dimanche"}
 
@@ -71,7 +87,14 @@ def dictLen(value):
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("404.html", feeds=feeds)
+    logging.error("Page not found")
+    logging.error(e)
+    return render_template("404.html", feeds=feeds),404
+
+# @app.errorhandler(1)
+# def generalError(e):
+#     logging.error("Une erreur est survenue :")
+#     logging.error(e)
 
 @app.route("/")
 def home():

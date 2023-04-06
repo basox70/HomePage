@@ -7,3 +7,4 @@ __pycache__
 *env.py
 homepage.sock
 uwgi.ini
+*.log

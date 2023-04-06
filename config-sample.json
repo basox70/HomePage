@@ -13,6 +13,7 @@
             "rssUrl" : "rss url",
             "website" : "main website url"
         },
+    "loggingLevel": 10,
     "debug":true
     },
     "_informations": {
@@ -33,6 +34,7 @@
                 "website": "https://dev.to/"
             }
         },
+        "loggingLevel": "logging debug level (see https://docs.python.org/3/library/logging.html#logging-levels for more info)",
         "debug" : "true to display the error info on the website, false either"
     }
 }
