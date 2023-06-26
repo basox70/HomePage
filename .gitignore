@@ -8,3 +8,4 @@ __pycache__
 homepage.sock
 uwgi.ini
 *.log
+.well-known

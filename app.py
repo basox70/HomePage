@@ -2,7 +2,9 @@ import os, sys, json, subprocess
 from time import strptime, strftime
 from pprint import pprint
 from datetime import datetime, date
+
 import logging
+from logging.handlers import RotatingFileHandler, SysLogHandler
 
 from flask import Flask, render_template, request, session, redirect, url_for, abort, flash
 from hashlib import sha256
@@ -15,20 +17,21 @@ feeds = cfg.rss
 
 app = Flask(__name__)
 
-if cfg.loggingLevel == logging.INFO:
-    logfile = f'logs/{datetime.now().strftime("%Y%m")}_homepage.log'
-elif cfg.loggingLevel == logging.DEBUG:
-    logfile = f'logs/{datetime.now().strftime("%Y%m%d_%H%M")}_homepage.log'
-else:
-    logfile = f'logs/homepage.log'
 
-logging.basicConfig(filename=logfile, filemode="a", format='%(asctime)s-%(process)d-%(levelname)s-%(message)s', datefmt='%y%m%d_%H%M%S', level=cfg.loggingLevel)
-logging.info("------------------------------------------")
-logging.info("Starting website")
+logger = logging.getLogger("homepage")
+logger.setLevel(cfg.loggingLevel)
 
-# app.logger.
-# app.logger.info("------------------------------------------")
-# app.logger.info("Starting website")
+# Rotating file handler
+rotating_file_handler = RotatingFileHandler(filename=f'logs/{(cfg.appname).replace(" ","_")}.log', mode="w",
+    maxBytes=(hasattr(cfg,'maxBytes') and cfg.maxBytes or 100000), backupCount=(hasattr(cfg,'backupCount') and cfg.backupCount or 5), encoding="utf-8")
+rotating_file_formatter = logging.Formatter("%(asctime)s - %(process)d - [%(levelname)s] - %(message)s", datefmt='%y%m%d_%H%M%S')
+rotating_file_handler.setFormatter(rotating_file_formatter)
+logger.addHandler(rotating_file_handler)
+
+app.logger = logger
+
+app.logger.info("------------------------------------------")
+app.logger.info("Starting website")
 
 days = {"Monday":"Lundi", "Tuesday":"Mardi","Wednesday":"Mercredi", "Thursday":"Jeudi", "Friday":"Vendredi", "Saturday":"Samedi", "Sunday":"Dimanche"}
 
@@ -87,14 +90,9 @@ def dictLen(value):
 
 @app.errorhandler(404)
 def not_found(e):
-    logging.error("Page not found")
-    logging.error(e)
+    app.logger.error("Page not found")
+    app.logger.error(e)
     return render_template("404.html", feeds=feeds),404
-
-# @app.errorhandler(1)
-# def generalError(e):
-#     logging.error("Une erreur est survenue :")
-#     logging.error(e)
 
 @app.route("/")
 def home():
@@ -175,5 +173,5 @@ def configEdit():
     return render_template("config.html", cfg=cfg, saved=final, feeds=feeds)
 
 if __name__ == "__main__":
-    app.secret_key = os.urandom(12)
+    app.secret_key = sha256(os.urandom(64)).hexdigest()
     app.run(port=cfg.port, debug=cfg.debug)
