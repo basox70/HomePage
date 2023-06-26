@@ -147,7 +147,7 @@ def configEdit():
                     print(rssToDel)
             appname = request.form['appname']
             username = request.form['username']
-            password = len(request.form['password'])<64 and sha256(request.form['password'].encode()) or request.form['password']
+            password = len(request.form['password'])<64 and sha256(request.form['password'].encode()).hexdigest() or request.form['password']
             port = int(request.form['port'])
             meteoToken = request.form['meteoToken']
             insee = [int(i) for i in request.form['insee'].split(",")]
