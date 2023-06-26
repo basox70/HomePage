@@ -165,7 +165,7 @@ def configEdit():
                     "username" : username,
                     "password" : password,
                     "rss" : rss,
-                    "logging" : logging,
+                    "loggingLevel" : logging,
                     "debug" : debug
                     }
             final = config.Config().save(data)
