@@ -16,6 +16,7 @@ cfg = config.Config()
 feeds = cfg.rss
 
 app = Flask(__name__)
+app.secret_key = sha256(os.urandom(64)).hexdigest()
 
 
 logger = logging.getLogger("homepage")
@@ -173,5 +174,4 @@ def configEdit():
     return render_template("config.html", cfg=cfg, saved=final, feeds=feeds)
 
 if __name__ == "__main__":
-    app.secret_key = sha256(os.urandom(64)).hexdigest()
     app.run(port=cfg.port, debug=cfg.debug)
