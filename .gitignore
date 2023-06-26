@@ -9,3 +9,4 @@ homepage.sock
 uwgi.ini
 *.log
 .well-known
+pull.sh
